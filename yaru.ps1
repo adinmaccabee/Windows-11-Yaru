@@ -126,6 +126,12 @@ Write-Host "Dark mode enabled (apps + system)." -ForegroundColor Green
 
 # ---------- 5. Install the .theme file ----------
 if ($haveTheme) {
+    # Rewrite the Wallpaper= line with the literal, fully-resolved path -
+    # some Windows builds don't reliably expand %LOCALAPPDATA% inside .theme files.
+    $themeContent = Get-Content -Path $ThemeDst -Raw
+    $themeContent = $themeContent -replace 'Wallpaper=.*', "Wallpaper=$WallpaperDst"
+    Set-Content -Path $ThemeDst -Value $themeContent -Encoding UTF8
+
     Start-Process $ThemeDst
     Write-Host "yaru.theme launched - Windows will install it under Settings > Personalization > Themes." -ForegroundColor Green
 }
