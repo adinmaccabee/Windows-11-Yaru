@@ -68,31 +68,31 @@ if (-not $haveWallpaper) {
 }
 
 # ---------- 1. Set desktop wallpaper ----------
-Add-Type @"
-using System;
-using System.Runtime.InteropServices;
-public class Wallpaper {
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-}
-"@ -ErrorAction SilentlyContinue
-
-Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -Value "10"
-Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name TileWallpaper  -Value "0"
-[Wallpaper]::SystemParametersInfo(20, 0, $WallpaperDst, 3) | Out-Null
-Write-Host "Wallpaper set." -ForegroundColor Green
+#Add-Type @"
+#using System;
+#using System.Runtime.InteropServices;
+#public class Wallpaper {
+#    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+#    public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+#}
+#"@ -ErrorAction SilentlyContinue
+#
+#Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -Value "10"
+#Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name TileWallpaper  -Value "0"
+#[Wallpaper]::SystemParametersInfo(20, 0, $WallpaperDst, 3) | Out-Null
+#Write-Host "Wallpaper set." -ForegroundColor Green
 
 # ---------- 2. Set lock screen image ----------
-if ($haveLockscreen) {
-    if (Test-IsAdmin) {
-        $polKey = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization"
-        New-Item -Path $polKey -Force | Out-Null
-        Set-ItemProperty -Path $polKey -Name "LockScreenImage" -Value $LockscreenDst -Type String
-        Write-Host "Lock screen set." -ForegroundColor Green
-    } else {
-        Write-Warning "Not running as Administrator - skipped lock screen (re-run elevated to set it)."
-    }
-}
+#if ($haveLockscreen) {
+#    if (Test-IsAdmin) {
+#        $polKey = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization"
+#        New-Item -Path $polKey -Force | Out-Null
+#        Set-ItemProperty -Path $polKey -Name "LockScreenImage" -Value $LockscreenDst -Type String
+#        Write-Host "Lock screen set." -ForegroundColor Green
+#    } else {
+#        Write-Warning "Not running as Administrator - skipped lock screen (re-run elevated to set it)."
+#    }
+#}
 
 # ---------- 3. Set accent color ----------
 $accentPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent"
