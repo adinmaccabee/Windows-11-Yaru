@@ -57,15 +57,15 @@ function Get-RemoteFile {
 }
 
 # ---------- Download assets ----------
-Write-Host "Downloading assets from $BaseUrl ..." -ForegroundColor Cyan
-$haveWallpaper  = Get-RemoteFile -Path "bloom.png"            -Destination $WallpaperDst
-$haveLockscreen = Get-RemoteFile -Path "bloom_lockscreen.png" -Destination $LockscreenDst
-$haveTheme      = Get-RemoteFile -Path "yaru.theme"            -Destination $ThemeDst
-
-if (-not $haveWallpaper) {
-    Write-Error "Wallpaper download failed - check GitHubUser/GitHubRepo/GitHubBranch at the top of this script, and that the repo is public."
-    exit 1
-}
+#Write-Host "Downloading assets from $BaseUrl ..." -ForegroundColor Cyan
+#$haveWallpaper  = Get-RemoteFile -Path "bloom.png"            -Destination $WallpaperDst
+#$haveLockscreen = Get-RemoteFile -Path "bloom_lockscreen.png" -Destination $LockscreenDst
+#$haveTheme      = Get-RemoteFile -Path "yaru.theme"            -Destination $ThemeDst
+#
+#if (-not $haveWallpaper) {
+#    Write-Error "Wallpaper download failed - check GitHubUser/GitHubRepo/GitHubBranch at the top of this script, and that the repo is public."
+#    exit 1
+#}
 
 # ---------- 1. Set desktop wallpaper ----------
 #Add-Type @"
